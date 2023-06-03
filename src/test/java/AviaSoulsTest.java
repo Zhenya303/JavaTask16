@@ -13,6 +13,10 @@ public class AviaSoulsTest {
     Ticket ticket3 = new Ticket("London", "Paris", 7000, 11_00, 15_30);
     Ticket ticket4 = new Ticket("London", "Paris", 9000, 15_00, 18_50);
     Ticket ticket5 = new Ticket("London", "Paris", 6500, 13_00, 17_40);
+    Ticket ticket6 = new Ticket("Milan", "Barcelona", 6600, 13_10, 17_50);
+    Ticket ticket7 = new Ticket("Milan", "Barcelona", 6700, 13_20, 18_00);
+
+    Ticket ticket8 = new Ticket("Moscow", "Saint-Petersburg", 6700, 13_20, 18_00);
 
     @BeforeEach
 
@@ -23,6 +27,21 @@ public class AviaSoulsTest {
         aviaSouls.add(ticket3);
         aviaSouls.add(ticket4);
         aviaSouls.add(ticket5);
+        aviaSouls.add(ticket6);
+        aviaSouls.add(ticket7);
+        aviaSouls.add(ticket8);
+
+
+    }
+
+    @Test
+
+    public void shouldFindAllTickets(){
+
+        Ticket[] expected = {ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, ticket8};
+        Ticket[] actual = aviaSouls.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -75,6 +94,38 @@ public class AviaSoulsTest {
 
         Assertions.assertArrayEquals(expected, actual);
 
+    }
+
+    @Test
+
+    public void shouldSearchFewTickets(){
+
+        Ticket[] expected = {ticket6, ticket7};
+        Ticket[] actual = aviaSouls.search("Milan", "Barcelona");
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+
+    public void shouldSearchInOneTicket(){
+
+        Ticket[] expected = {ticket8};
+        Ticket[] actual = aviaSouls.search("Moscow", "Saint-Petersburg");
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+
+    public void shouldSearchUnExistedTicket(){
+
+        Ticket[] expected = {};
+        Ticket[] actual = aviaSouls.search("Berlin", "Prague");
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 
 
